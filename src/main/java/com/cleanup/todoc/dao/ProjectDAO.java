@@ -10,9 +10,7 @@ import com.cleanup.todoc.model.Project;
 
 import java.util.List;
 
-/**
- * Created by Alexandre Vanneçon "Razamelpar"
- */
+
 @Dao
 public interface ProjectDAO {
 

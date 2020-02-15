@@ -11,9 +11,8 @@ import com.cleanup.todoc.model.Task;
 
 import java.util.List;
 
-/**
- * Created by Alexandre Vanneçon "Razamelpar"
- */
+
+
 @Dao
 public interface TaskDAO {
 
