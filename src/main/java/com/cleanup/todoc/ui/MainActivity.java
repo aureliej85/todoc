@@ -83,6 +83,8 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         configureViewModel();
         getProjects();
         getTasks();
+
+
     }
 
 

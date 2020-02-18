@@ -7,6 +7,9 @@ import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.cleanup.todoc.R;
+
+import java.io.InputStream;
 import java.util.Comparator;
 
 import static android.arch.persistence.room.ForeignKey.CASCADE;
@@ -167,4 +170,5 @@ public class Task {
             return (int) (left.creationTimestamp - right.creationTimestamp);
         }
     }
+
 }

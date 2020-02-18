@@ -32,6 +32,14 @@ public class TaskUnitTest {
     }
 
     @Test
+    public void test_projects2(){
+        final Task task1 = new Task(1, "task 1", new Date().getTime());
+        final Task task2 = new Task(2, "task 2", new Date().getTime());
+        final Task task3 = new Task(3, "task 3", new Date().getTime());
+        final Task task4 = new Task(4, "task 4", new Date().getTime());
+    }
+
+    @Test
     public void test_az_comparator() {
         final Task task1 = new Task(1, "aaa", 123);
         final Task task2 = new Task(2, "zzz", 124);

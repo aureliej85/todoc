@@ -7,11 +7,22 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
+
+import com.cleanup.todoc.R;
 import com.cleanup.todoc.dao.ProjectDAO;
 import com.cleanup.todoc.dao.TaskDAO;
 import com.cleanup.todoc.model.Project;
 import com.cleanup.todoc.model.Task;
+import com.google.gson.Gson;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringWriter;
+import java.io.Writer;
 
 
 @Database(entities = {Project.class, Task.class}, version = 1, exportSchema = false)
@@ -23,6 +34,7 @@ public abstract class TodocDb extends RoomDatabase {
     public abstract ProjectDAO projectDAO();
     public abstract TaskDAO taskDAO();
 
+
     //instance
 
     public static TodocDb getInstance(Context context) {
@@ -32,7 +44,7 @@ public abstract class TodocDb extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             TodocDb.class,
                             "TodocDb.db")
-                            .addCallback(prepopulateDatabase())
+                            .addCallback(roomCallback)
                             .build();
                 }
             }
@@ -42,24 +54,20 @@ public abstract class TodocDb extends RoomDatabase {
 
     //--
 
-   private static Callback prepopulateDatabase(){
-        return new Callback() {
 
-            @Override
-            public void onCreate(@NonNull SupportSQLiteDatabase db) {
-                super.onCreate(db);
+    public static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback(){
+        @Override
+        public void onCreate(@NonNull SupportSQLiteDatabase db) {
+            super.onCreate(db);
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("projectId", 1L);
+            contentValues.put("name", "C'est une tâche qui persiste");
+            contentValues.put("creationTimestamp", 1581184803370L);
+            db.insert("tasks", OnConflictStrategy.IGNORE, contentValues);
+        }
+    };
 
-                Project[] projects = Project.getAllProjects();
-                for (Project project : projects) {
-                    ContentValues contentValues = new ContentValues();
-                    contentValues.put("id", project.getId());
-                    contentValues.put("name", project.getName());
-                    contentValues.put("color", project.getColor());
-                    db.insert("projects", OnConflictStrategy.IGNORE, contentValues);
-                }
-            }
-        };
-    }
+
 
 }
 
