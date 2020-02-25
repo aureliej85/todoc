@@ -1,14 +1,16 @@
 package com.cleanup.todoc.ui;
 
-import android.arch.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,7 +41,8 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
 
     private ProjectAndTaskViewModel projectAndTaskViewModel; //List of all projects available in the application
 
-    private List<Project> allProjects; //List of all current tasks of the application
+    //private List<Project> allProjects; //List of all current tasks of the application
+    private final Project[] allProjects = Project.getAllProjects();
 
     private TasksAdapter adapter; //The adapter which handles the list of tasks
 
@@ -94,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
         ViewModelFactory viewModelFactory = Injection.provideViewModelFactory(this);
         projectAndTaskViewModel = ViewModelProviders.of(this, viewModelFactory).get(ProjectAndTaskViewModel.class);
         projectAndTaskViewModel.init();
+        Log.i("MainActivity", "configureViewModel: ");
     }
 
 
@@ -103,12 +107,14 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
      *
      */
     private void getProjects() {
-        projectAndTaskViewModel.getAllProjects().observe(this, this::updateProjects);
+        projectAndTaskViewModel.getAllProjects();
+        //.observe(this, null);
+        Log.i("MainActivity", "getProjects: ");
     }
 
-    private void updateProjects(List<Project> projects) {
+    /*private void updateProjects(List<Project> projects) {
         allProjects = projects;
-    }
+    }*/
 
 
 
@@ -124,6 +130,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
      */
     private void addTask(@NonNull Task task) {
         projectAndTaskViewModel.createTask(task);
+        Log.i("MainActivity", "addTask: ");
     }
 
     /**
@@ -162,7 +169,9 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
     }
 
     private void getTasks() {
-        projectAndTaskViewModel.getAllTasks().observe(this, this::updateTasks);
+        projectAndTaskViewModel.getAllTasks();
+                //.observe(this, this::updateTasks);
+        Log.i("MainActivity", "getTasks: ");
     }
 
 
@@ -204,6 +213,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
      * @param dialogInterface the current displayed dialog
      */
     private void onPositiveButtonClick(DialogInterface dialogInterface) {
+        Log.i("MainActivity", "onPositiveButtonClick: ");
         // If dialog is open
         if (dialogEditText != null && dialogSpinner != null) {
             // Get the name of the task
@@ -242,6 +252,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
      * Shows the Dialog for adding a Task
      */
     private void showAddTaskDialog() {
+        Log.i("MainActivity", "showAddTaskDialog: ");
         final AlertDialog dialog = getAddTaskDialog();
 
         dialog.show();
@@ -260,6 +271,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
      */
     @NonNull
     private AlertDialog getAddTaskDialog() {
+        Log.i("MainActivity", "getAddTaskDialog: ");
         final AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this, R.style.Dialog);
 
         alertBuilder.setTitle(R.string.add_task);
@@ -300,6 +312,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
      * Sets the data of the Spinner with projects to associate to a new task
      */
     private void populateDialogSpinner() {
+        Log.i("MainActivity", "populateDialogSpinner: ");
         final ArrayAdapter<Project> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, allProjects);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         if (dialogSpinner != null) {
@@ -336,6 +349,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
     @Override
     protected void onResume() {
         super.onResume();
+        Log.i("MainActivity", "onResume: ");
     }
 
 }

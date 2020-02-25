@@ -1,10 +1,11 @@
 package com.cleanup.todoc.dao;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Insert;
-import android.arch.persistence.room.OnConflictStrategy;
-import android.arch.persistence.room.Query;
+import androidx.lifecycle.LiveData;
+import androidx.room.Dao;
+import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
+import androidx.room.Query;
+import androidx.room.Update;
 
 import com.cleanup.todoc.model.Project;
 
@@ -15,8 +16,11 @@ import java.util.List;
 public interface ProjectDAO {
 
     @Query("SELECT * FROM projects")
-    LiveData<List<Project>> getProjects();
+    List<Project> getProjects();
 
     @Insert
-    void insertProjects(Project... projects);
+    void insertProjects(Project projects);
+
+    @Update
+    void updateProjects(Project projects);
 }

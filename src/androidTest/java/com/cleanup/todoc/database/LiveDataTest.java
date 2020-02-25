@@ -1,11 +1,8 @@
 package com.cleanup.todoc.database;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.Observer;
-import android.support.annotation.Nullable;
-import android.support.test.runner.AndroidJUnit4;
-
-import org.junit.runner.RunWith;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.annotation.Nullable;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;

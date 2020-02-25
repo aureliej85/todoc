@@ -1,9 +1,9 @@
 package com.cleanup.todoc.database.dao;
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule;
-import android.arch.persistence.room.Room;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
+import androidx.room.Room;
+import androidx.test.platform.app.InstrumentationRegistry;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.cleanup.todoc.database.LiveDataTest;
 import com.cleanup.todoc.database.TodocDb;

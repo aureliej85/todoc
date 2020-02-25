@@ -1,11 +1,12 @@
 package com.cleanup.todoc.dao;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Delete;
-import android.arch.persistence.room.Insert;
-import android.arch.persistence.room.Query;
-import android.arch.persistence.room.Update;
+import androidx.lifecycle.LiveData;
+import androidx.room.Dao;
+import androidx.room.Delete;
+import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
+import androidx.room.Query;
+import androidx.room.Update;
 
 import com.cleanup.todoc.model.Task;
 
@@ -17,9 +18,9 @@ import java.util.List;
 public interface TaskDAO {
 
     @Query("SELECT * FROM tasks")
-    LiveData<List<Task>> getTasks();
+    List<Task> getTasks();
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertTask(Task task);
 
     @Delete
