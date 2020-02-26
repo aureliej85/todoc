@@ -2,8 +2,9 @@ package com.cleanup.todoc.database.dao;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.room.Room;
-import androidx.test.platform.app.InstrumentationRegistry;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.InstrumentationRegistry;
+
+import androidx.test.runner.AndroidJUnit4;
 
 import com.cleanup.todoc.database.LiveDataTest;
 import com.cleanup.todoc.database.TodocDb;
@@ -49,7 +50,7 @@ public class ProjectDaoTest {
     public void testProject() throws InterruptedException {
         List<Project> projects = LiveDataTest.getValue(this.database.projectDAO().getProjects());
         assertTrue(projects.isEmpty());
-        this.database.projectDAO().insertProjects(this.projects);
+        this.database.projectDAO().insertProject(this.projects);
 
         projects = LiveDataTest.getValue(this.database.projectDAO().getProjects());
         assertEquals(projects.get(0).getName(), this.projects[0].getName());

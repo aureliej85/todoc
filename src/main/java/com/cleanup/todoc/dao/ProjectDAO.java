@@ -15,12 +15,10 @@ import java.util.List;
 @Dao
 public interface ProjectDAO {
 
-    @Query("SELECT * FROM projects")
-    List<Project> getProjects();
+    @Query("SELECT * FROM project")
+    LiveData<List<Project>> getProjects();
 
     @Insert
-    void insertProjects(Project projects);
+    void insertProject(Project project);
 
-    @Update
-    void updateProjects(Project projects);
 }

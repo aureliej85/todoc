@@ -15,7 +15,12 @@ public class ProjectRepository {
         projectDAO = projectDao;
     }
 
-    public List<Project> getAllProjects() {
+    public LiveData<List<Project>> getAllProjects() {
         return projectDAO.getProjects();
+    }
+
+
+    public void insertProject(Project project){
+         projectDAO.insertProject(project);
     }
 }

@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
 
     private ProjectAndTaskViewModel projectAndTaskViewModel; //List of all projects available in the application
 
-    //private List<Project> allProjects; //List of all current tasks of the application
-    private final Project[] allProjects = Project.getAllProjects();
+    private List<Project> allProjects; //List of all current tasks of the application
+    //private final Project[] allProjects = Project.getAllProjects();
 
     private TasksAdapter adapter; //The adapter which handles the list of tasks
 
@@ -107,14 +107,13 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
      *
      */
     private void getProjects() {
-        projectAndTaskViewModel.getAllProjects();
-        //.observe(this, null);
+        projectAndTaskViewModel.getAllProjects().observe(this, this::updateProjects);
         Log.i("MainActivity", "getProjects: ");
     }
 
-    /*private void updateProjects(List<Project> projects) {
+    private void updateProjects(List<Project> projects) {
         allProjects = projects;
-    }*/
+    }
 
 
 
@@ -129,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
      * @param task the task to be added to the list
      */
     private void addTask(@NonNull Task task) {
-        projectAndTaskViewModel.createTask(task);
+        projectAndTaskViewModel.addTask(task);
         Log.i("MainActivity", "addTask: ");
     }
 
@@ -169,8 +168,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
     }
 
     private void getTasks() {
-        projectAndTaskViewModel.getAllTasks();
-                //.observe(this, this::updateTasks);
+        projectAndTaskViewModel.getAllTasks().observe(this, this::updateTasks);
         Log.i("MainActivity", "getTasks: ");
     }
 

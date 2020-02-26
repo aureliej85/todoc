@@ -42,7 +42,7 @@ public class TaskDaoTest {
                 TodocDb.class)
                 .allowMainThreadQueries()
                 .build();
-        this.database.projectDAO().insertProjects(this.projects);
+        this.database.projectDAO().insertProject(this.projects);
 
         List<Task> tasks = LiveDataTest.getValue(this.database.taskDAO().getTasks());
         assertTrue(tasks.isEmpty());

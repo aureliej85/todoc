@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
  * @author Gaëtan HERFRAY
  */
 
-@Entity(tableName = "projects")
+@Entity(tableName = "project")
 public class Project {
     /**
      * The unique identifier of the project

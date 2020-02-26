@@ -20,7 +20,7 @@ public class ProjectAndTaskViewModel extends ViewModel {
     private final Executor executor;
 
     @Nullable
-    private List<Project> projects;
+    private LiveData<List<Project>> projects;
 
     public ProjectAndTaskViewModel(ProjectRepository projectDataSource, TaskRepository taskDataSource, Executor executor) {
         projectRepository = projectDataSource;
@@ -34,19 +34,20 @@ public class ProjectAndTaskViewModel extends ViewModel {
     }
 
     @Nullable
-    public List<Project> getAllProjects() {
+    public LiveData<List<Project>> getAllProjects() {
         return projects;
     }
 
-    public List<Task> getAllTasks() {
+    public LiveData<List<Task>> getAllTasks() {
         return taskRepository.getAllTasks();
     }
 
-    public void createTask(Task task) {
+    public void addTask(Task task) {
         executor.execute(() -> {
             taskRepository.insertTask(task);
         });
     }
+
 
     public void deleteTask(Task task) {
         executor.execute(() -> {

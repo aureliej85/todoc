@@ -58,7 +58,7 @@ public abstract class TodocDb extends RoomDatabase {
                 contentValues.put("projectId", 1L);
                 contentValues.put("name", "C'est une tâche qui persiste");
                 contentValues.put("creationTimestamp", 1581184803370L);
-                db.insert("tasks", OnConflictStrategy.IGNORE, contentValues);
+                db.insert("task", OnConflictStrategy.IGNORE, contentValues);
 
             }
         };
